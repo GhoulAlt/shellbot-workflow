@@ -58,6 +58,13 @@ jobs:
         run: |
           cd shell-bot
           npm install
+      - name: Send Restart Message in Telegram
+        run: |
+          function sendTG() {
+          curl -s "https://api.telegram.org/bot${{ secrets.authToken }}/sendmessage" \
+          --data "text=${*}&chat_id=${{ secrets.ChatId }}&parse_mode=Markdown&disable_notification=True"
+          }
+          sendTG "*PrajjuS ShellBot Restarted*" &> /dev/null
       - name: Run shell-bot server
         timeout-minutes: 320
         continue-on-error: true
