@@ -73,9 +73,9 @@ jobs:
           node server
       - name: Workflow Looping
         run: |
-          git clone https://github.com/${GITHUB_REPOSITORY} loop
+          git clone https://${{ secrets.GH_TOKEN }}@github.com/${GITHUB_REPOSITORY} loop
           cd loop || exit 1
           echo $(( RANDOM - ( RANDOM % RANDOM ) )) > looger.txt
           git add looger.txt
           git commit -m "Looping at $(date -u +%D-%T%P)"
-          git push -q https://github.com/${GITHUB_REPOSITORY} HEAD:main
+          git push -q https://${{ secrets.GH_TOKEN }}@github.com/${GITHUB_REPOSITORY} HEAD:main
